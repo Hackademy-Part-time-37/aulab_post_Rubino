@@ -2,21 +2,23 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
-    
-    public function register(): void
-    {
-        
-    }
-
-    
     public function boot(): void
     {
-        
-        Blade::component('components.layout', 'layout');
+        if (Schema::hasTable('categories')) {
+            $categories = Category::all();
+            View::share('categories', $categories);
+        }
+    }
+
+    public function register(): void
+    {
+        //
     }
 }
