@@ -33,10 +33,20 @@
                             <h5 class="card-title">{{ $article->title }}</h5>
                             <p class="card-subtitle">{{ $article->subtitle }}</p>
                             <p class="small text-muted">
-                                Categoria:
-                                <a href="{{ route('article.byCategory', $article->category) }}" class="text-capitalize">
-                                    {{ $article->category->name }}
-                                </a>
+                                <p class="small text-muted my-0">
+                                    @foreach ($article->tags as $tag)
+                                        {{ $tag->name }}
+                                    @endforeach
+                                </p>
+                                @if ($article->category)
+    <p class="small text-muted">Categoria:
+        <a href="{{ route('article.byCategory', $article->category) }}" class="text-capitalize text-muted">
+            {{ $article->category->name }}
+        </a>
+    </p>
+@else
+    <p class="small text-muted my-0">Nessuna categoria</p>
+@endif
                             </p>
                         </div>
                         {{-- Informazioni aggiuntive --}}
