@@ -28,6 +28,11 @@
                     </li>
                 </ul>
             </li>
+            <form action="{{ route('article.search') }}" method="GET" class="d-flex" role="search">
+                <input class="form-control me-2" type="search" name="query" placeholder="Cerca tra gli articoli..." aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit">Cerca</button>
+            </form>
+            
             <form action="{{ route('logout') }}" method="POST" id="form-logout" class="d-none">
                 @csrf
             </form>
