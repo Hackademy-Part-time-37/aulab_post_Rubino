@@ -9,6 +9,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\tag;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -104,24 +105,72 @@ foreach ($tags as $tag) {
      * Show the form for editing the specified resource.
      */
     public function edit(Article $article)
-    {
-        //
+{
+    if (Auth::user()->id === $article->user_id) {
+        return view('article.edit', compact('article'));
     }
+    return redirect()->route('homepage')->with('alert', 'Accesso non consentito');
+}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Article $article)
-    {
-        //
+{
+    $request->validate([
+        'title' => 'required|min:5|unique:articles,title,' . $article->id,
+        'subtitle' => 'required|min:5',
+        'body' => 'required|min:10',
+        'image' => 'image',
+        'category' => 'required',
+        'tags' => 'required'
+    ]);
+
+    $article->update([
+        'title' => $request->title,
+        'subtitle' => $request->subtitle,
+        'body' => $request->body,
+        'category_id' => $request->category,
+    ]);
+
+    if ($request->image) {
+        Storage::delete($article->image);
+        $article->update([
+            'image' => $request->file('image')->store('public/images')
+        ]);
     }
+
+    $tags = explode(',', $request->tags);
+    foreach ($tags as $i => $tag) {
+        $tags[$i] = trim($tag);
+    }
+
+    $newTags = [];
+    foreach ($tags as $tag) {
+        $newTag = Tag::updateOrCreate([
+            'name' => strtolower($tag)
+        ]);
+        $newTags[] = $newTag->id;
+    }
+    $article->tags()->sync($newTags);
+
+    return redirect(route('writer.dashboard'))->with('message', 'Articolo modificato con successo');
+}
 
     /**
      * Remove the specified resource from storage.
      */
+      //
+
     public function destroy(Article $article)
     {
-        //
+        foreach ($article->tags as $tag) {
+            $article->tags()->detach($tag);
+        }
+    
+        $article->delete();
+    
+        return redirect()->back()->with('message', 'Articolo cancellato con successo');
     }
 
     public function byCategory(Category $category)
@@ -135,5 +184,6 @@ public function byUser(User $user)
     $articles = $user->articles()->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
     return view('article.by-user', compact('user', 'articles'));
 }
+
 
 }

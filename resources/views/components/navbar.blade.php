@@ -10,6 +10,7 @@
             @if (Auth::user()->is_admin)
                 <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard Admin</a></li>
             @endif
+
             @if (Auth::user()->is_revisor)
                 <li>
                 <a class="dropdown-item" href="{{ route('revisor.dashboard') }}">
@@ -18,6 +19,10 @@
                         </li>
             @endif
 
+            @if (Auth::user()->is_writer)
+                <li><a class="dropdown-item" href="{{ route('writer.dashboard') }}">Dashboard Writer</a></li>
+            @endif
+            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->name }}
@@ -32,7 +37,7 @@
                 <input class="form-control me-2" type="search" name="query" placeholder="Cerca tra gli articoli..." aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Cerca</button>
             </form>
-            
+
             <form action="{{ route('logout') }}" method="POST" id="form-logout" class="d-none">
                 @csrf
             </form>
