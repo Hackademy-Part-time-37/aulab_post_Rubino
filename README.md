@@ -1,66 +1,188 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Documentazione 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+INTRODUZIONE
 
-## About Laravel
+“The Aulab Post” è una piattaforma per la gestione di articoli online. Gli utenti possono pubblicare, visualizzare, cercare, modificare e approvare articoli in base ai loro ruoli. La piattaforma è stata sviluppata in Laravel, utilizzando il modello MVC per una gestione strutturata e scalabile del codice.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+BACKLOG
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+	1.	Caricamento di un articolo da parte di un utente loggato al sistema:
+	•	L’utente può inserire un articolo con titolo, sottotitolo, corpo del testo e immagine.
+	•	Relazione con categorie predefinite (1-a-N).
+	•	Visualizzazione di un messaggio di conferma all’inserimento.
+	2.	Visualizzazione pubblica degli articoli e del loro dettaglio:
+	•	Lista degli articoli più recenti in home.
+	•	Possibilità di cliccare per vedere il dettaglio di ogni articolo.
+	3.	Sistema di approvazione degli articoli da parte di utenti abilitati:
+	•	Ruoli gestiti: Admin, Revisor, Writer.
+	•	Revisor può accettare o rifiutare articoli.
+	4.	Sistema di ricerca degli articoli pubblicati in piattaforma:
+	•	Ricerca full-text per titolo, sottotitolo, categoria.
+	5.	Sistema di gestione dei tag da parte di utenti abilitati:
+	•	Relazione N-a-N tra articoli e tag.
+	•	Permesso di aggiungere/modificare tag limitato agli admin.
+	6.	Sistema di modifica e cancellazione degli articoli pubblicati da parte di utenti abilitati:
+	•	Dashboard per writer.
+	•	Solo l’autore può modificare/cancellare il proprio articolo.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    User Stories
 
-## Learning Laravel
+User Story #1
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+	•	Come: Sara
+	•	Vorrei: Registrarmi in piattaforma per inserire un articolo.
+	•	In modo tale: Da lavorare per “The Aulab Post”.
+	•	Acceptance Criteria:
+	•	Utente può registrarsi/loggarsi.
+	•	Pulsante “Inserisci articolo” visibile solo agli utenti loggati.
+	•	Articolo composto da: titolo, sottotitolo, corpo, immagine di copertina.
+	•	Messaggio di conferma dopo l’inserimento.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    User Story #2
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+	•	Come: Lorenzo
+	•	Vorrei: Visualizzare gli ultimi articoli sul portale.
+	•	In modo tale: Da informarmi su ciò che succede nel mondo.
+	•	Acceptance Criteria:
+	•	Home mostra solo gli articoli più recenti.
+	•	Ordine cronologico inverso (dal più recente).
+	•	Link per vedere il dettaglio di ogni articolo.
 
-## Laravel Sponsors
+    User Story #3
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+	•	Come: Marta
+	•	Vorrei: Contare su una funzione di fact-checking.
+	•	In modo tale: Da controllare quali notizie pubblicare.
+	•	Acceptance Criteria:
+	•	Ruoli gestiti: Admin, Revisor, Writer.
+	•	Revisor può accettare/rifiutare articoli.
 
-### Premium Partners
+    User Story #4
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+	•	Come: Lorenzo
+	•	Vorrei: Cercare tra gli articoli.
+	•	In modo tale: Da visualizzare subito quello che mi interessa.
+	•	Acceptance Criteria:
+	•	Ricerca per titolo, sottotitolo, categoria.
 
-## Contributing
+    User Story #5
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+	•	Come: Corrado
+	•	Vorrei: Gestire in autonomia tag e categorie.
+	•	In modo tale: Da avere una piattaforma sempre aggiornata.
+	•	Acceptance Criteria:
+	•	Creazione/modifica/eliminazione di tag e categorie riservata agli admin.
 
-## Code of Conduct
+    User Story #6
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+	•	Come: Sara
+	•	Vorrei: Modificare o cancellare i miei articoli.
+	•	In modo tale: Da mantenere alta la qualità del mio lavoro.
+	•	Acceptance Criteria:
+	•	Dashboard per writer con opzioni di modifica/cancellazione.
 
-## Security Vulnerabilities
+    Extra User Story #7
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+	•	Come: Lorenzo
+	•	Vorrei: Avere informazioni aggiuntive sugli articoli.
+	•	In modo tale: Da scegliere cosa leggere.
+	•	Acceptance Criteria:
+	•	Slug del titolo nell’URL.
+	•	Calcolo del tempo di lettura dell’articolo.
 
-## License
+    Funzionalità Implementate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+	1.	Gestione Ruoli:
+	•	Ruoli Admin, Writer, Revisor implementati.
+	•	Middleware per autorizzazioni.
+	2.	CRUD Articoli:
+	•	Creazione, lettura, modifica e cancellazione di articoli.
+	•	Validazione dei campi obbligatori.
+	3.	Ricerca Articoli:
+	•	Funzione di ricerca full-text per titolo, sottotitolo, categoria.
+	4.	Sistema di Categorie e Tag:
+	•	Relazione 1-a-N per categorie.
+	•	Relazione N-a-N per tag.
+	5.	Approfondimenti Extra:
+	•	Slug negli URL per SEO.
+	•	Tempo di lettura calcolato automaticamente.
+
+    Tecnologie e Strumenti
+
+	•	Framework: Laravel 9
+	•	Linguaggi: PHP, Blade (HTML), CSS
+	•	Database: MySQL
+	•	Gestione Dipendenze: Composer
+	•	Versionamento: Git (GitHub)
+
+
+	## Iterazioni
+
+	Iterazione 1: Registrazione e Inserimento Articoli
+
+	•	Obiettivo: Consentire agli utenti di registrarsi e creare articoli.
+	•	Task:
+	1.	Implementare la registrazione e il login degli utenti.
+	2.	Creare il pulsante “Inserisci Articolo” visibile solo agli utenti loggati.
+	3.	Consentire agli utenti di creare articoli con i seguenti campi:
+	•	Titolo
+	•	Sottotitolo
+	•	Corpo del testo
+	•	Immagine di copertina
+	•	Categoria precompilata
+	4.	Aggiungere un messaggio di conferma dopo l’inserimento.
+
+	Iterazione 2: Visualizzazione degli Articoli
+
+	•	Obiettivo: Permettere la visualizzazione pubblica degli articoli.
+	•	Task:
+	1.	Mostrare in home page gli articoli più recenti.
+	2.	Aggiungere un ordinamento in home e index dal più recente al più vecchio.
+	3.	Creare una pagina di dettaglio per ogni articolo.
+
+	Iterazione 3: Sistema di Approvazione
+
+	•	Obiettivo: Consentire agli amministratori di approvare o rifiutare articoli.
+	•	Task:
+	1.	Definire tre ruoli utente: Admin, Revisore, Writer.
+	2.	Creare una dashboard per gestire le richieste.
+	3.	Aggiungere pulsanti “Accetta Articolo” e “Rifiuta Articolo”.
+
+	Iterazione 4: Funzione di Ricerca
+
+	•	Obiettivo: Permettere agli utenti di cercare articoli.
+	•	Task:
+	1.	Implementare una barra di ricerca con:
+	•	Ricerca per titolo.
+	•	Ricerca per sottotitolo.
+	•	Ricerca per categoria.
+    
+    Iterazione 5: Gestione Tag e Categorie
+
+	•	Obiettivo: Consentire la gestione autonoma di tag e categorie.
+	•	Task:
+	1.	Creare i tags.
+	2.	Collegare tags e articoli con relazione “N-a-N”.
+	3.	Permettere solo all’Admin di:
+	•	Modificare e cancellare categorie.
+	•	Modificare e cancellare tags.
+
+	Iterazione 6: Modifica e Cancellazione Articoli
+
+	•	Obiettivo: Consentire ai writer di modificare e cancellare i propri articoli.
+	•	Task:
+	1.	Creare una dashboard dedicata ai writer.
+	2.	Permettere ai writer di:
+	•	Modificare i propri articoli.
+	•	Cancellare i propri articoli.
+	3.	Implementare le seguenti regole:
+	•	Se l’articolo viene modificato, deve tornare in revisione.
+	•	Se l’immagine di un articolo viene modificata, cancellare la vecchia immagine dallo storage.
+	•	Quando l’articolo viene cancellato, cancellare l’immagine dallo storage.
+
+	Iterazione Extra: Informazioni Avanzate
+
+	•	Obiettivo: Aggiungere funzionalità avanzate per gli utenti.
+	•	Task:
+	1.	Aggiungere lo slug del titolo nell’URI della pagina di dettaglio.
+	2.	Calcolare i minuti di lettura degli articoli.

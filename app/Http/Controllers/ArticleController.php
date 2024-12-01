@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\tag;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 class ArticleController extends Controller
 {
 
@@ -72,6 +72,7 @@ class ArticleController extends Controller
         'image' => $request->file('image')->store('public/images'),
         'category_id' => $request->category,
         'user_id' => Auth::user()->id,
+        'slug' => Str::slug($request->title),
     ]);
     $tags = explode(',', $request->tags);
 
@@ -131,6 +132,7 @@ foreach ($tags as $tag) {
         'subtitle' => $request->subtitle,
         'body' => $request->body,
         'category_id' => $request->category,
+        'slug' => Str::slug($request->title),
     ]);
 
     if ($request->image) {
