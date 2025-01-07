@@ -22,4 +22,5 @@ class UserIsAdmin
         }
         return redirect(route('homepage'))->with('alert', 'Non sei autorizzato');
     }
+    
 }
