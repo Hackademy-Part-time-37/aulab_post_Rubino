@@ -26,4 +26,8 @@ class WriterController extends Controller
     
         return view('writer.dashboard', compact('acceptedArticles', 'rejectedArticles', 'unrevisionedArticles'));
     }
+    public function index()
+{
+    return $this->dashboard();
+}
 }

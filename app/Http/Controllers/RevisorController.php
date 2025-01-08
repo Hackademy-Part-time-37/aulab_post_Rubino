@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 
 class RevisorController extends Controller
 {
@@ -23,6 +24,7 @@ class RevisorController extends Controller
     {
         $article->is_accepted = true;
         $article->save();
+
         return redirect(route('revisor.dashboard'))->with('message', 'Articolo pubblicato');
     }
 
@@ -30,6 +32,7 @@ class RevisorController extends Controller
     {
         $article->is_accepted = false;
         $article->save();
+
         return redirect(route('revisor.dashboard'))->with('message', 'Articolo rifiutato');
     }
 
