@@ -7,6 +7,14 @@
         </div>
     </div>
     
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <a href="{{ route('article.create') }}" class="btn btn-primary">Crea Nuovo Articolo</a>
+            </div>
+        </div>
+    </div>
+    
     @if (session('message'))
     <div class="alert alert-success">
         {{ session('message') }}
@@ -39,4 +47,6 @@
             </div>
         </div>
     </div>
+
+
 </x-layout>
