@@ -1,5 +1,5 @@
 <x-layout>
-    <form method="POST" action="#" enctype="multipart/form-data">
+    <form method="POST" action= "{{ route('article.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
