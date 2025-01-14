@@ -11,12 +11,12 @@ class RevisorController extends Controller
     public function dashboard()
     {
         
-        $daRevisionare = Article::where('is_accepted', null)->get();
+        $unrevisionedArticles = Article::where('is_accepted', null)->get();
         $accettati = Article::where('is_accepted', true)->get();
         $rifiutati = Article::where('is_accepted', false)->get();
 
         
-        return view('revisor.dashboard', compact('daRevisionare', 'accettati', 'rifiutati'));
+        return view('revisor.dashboard', compact('unrevisionedArticles', 'accettati', 'rifiutati'));
     }
 
 
