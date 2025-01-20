@@ -9,15 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class RevisorController extends Controller
 {
     public function dashboard()
-    {
-        
-        $unrevisionedArticles = Article::where('is_accepted', null)->get();
-        $accettati = Article::where('is_accepted', true)->get();
-        $rifiutati = Article::where('is_accepted', false)->get();
+{
+    $unrevisionedArticles = Article::where('is_accepted', null)->get();
+    $acceptedArticles = Article::where('is_accepted', true)->get();
+    $rejectedArticles = Article::where('is_accepted', false)->get();
 
-        
-        return view('revisor.dashboard', compact('unrevisionedArticles', 'accettati', 'rifiutati'));
-    }
+    return view('revisor.dashboard', compact('unrevisionedArticles', 'acceptedArticles', 'rejectedArticles'));
+}
 
 
     public function acceptArticle(Article $article)
