@@ -16,15 +16,15 @@
                             <label for="role" class="form-label">Per quale ruolo ti stai candidando?</label>
                             <select name="role" id="role" class="form-control">
                                 <option value="" selected disabled>Seleziona il ruolo</option>
-                                @if (!Auth::user()->is_admin)
-                                    <option value="admin">Amministratore</option>
-                                @endif
-                                @if (!Auth::user()->is_revisor)
-                                    <option value="revisor">Revisore</option>
-                                @endif
-                                @if (!Auth::user()->is_writer)
-                                    <option value="writer">Redattore</option>
-                                @endif
+                                @if (auth()->check() && !auth()->user()->is_admin)
+                                <option value="admin">Amministratore</option>
+                            @endif
+                            @if (auth()->check() && !auth()->user()->is_revisor)
+                                <option value="revisor">Revisore</option>
+                            @endif
+                            @if (auth()->check() && !auth()->user()->is_writer)
+                                <option value="writer">Redattore</option>
+                            @endif
                             </select>
                             @error('role')
                                 <span class="text-danger">{{ $message }}</span>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" disabled class="form-control">
+                            <input type="email" id="email" name="email" value="{{ Auth::check() ? Auth::user()->email : '' }}" disabled class="form-control">
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -60,4 +60,4 @@
             <p>Scegliendo di lavorare come redattore, potrai scrivere gli articoli che saranno pubblicati.</p>
         </div>
     </div>
-</x-layout>
+</x-layout> 

@@ -21,7 +21,7 @@
                                     {{ $tag->name }}
                                 @endforeach
                             </p>
-                            @if ($article->category)
+@if ($article->category)
     <p class="small text-muted">Categoria:
         <a href="{{ route('article.byCategory', $article->category) }}" class="text-capitalize text-muted">
             {{ $article->category->name }}

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use App\Models\User;
 use App\Models\tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
+
 class ArticleController extends Controller
 {
 
@@ -176,10 +179,13 @@ foreach ($tags as $tag) {
     }
 
     public function byCategory(Category $category)
-{
-    $articles = $category->articles()->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
-    return view('article.by-category', compact('category', 'articles'));
-}
+    {
+        $articles = $category->articles()
+            ->where('is_accepted', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('article.by-category', compact('category', 'articles'));
+    }
 
 public function byUser(User $user)
 {

@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
@@ -10,12 +11,11 @@ use App\Http\Controllers\RevisorController;
 use App\Models\Tag;
 use App\Http\Controllers\WriterController;
 
+
+// Rotte pubbliche
 Route::get('/', [PublicController::class, 'homepage'])->name('homepage');
 
-// routes/web.php
-
-
-// Rotta per il login
+// Rotte per login e registrazione
 Route::view('/login', 'auth.login')->name('login');
 
 // Rotta per il register
@@ -26,6 +26,7 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+// Rotte per gli articoli
 Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
 
 Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
@@ -34,14 +35,15 @@ Route::get('/article/index', [ArticleController::class, 'index'])->name('article
 
 Route::get('/article/show/{article}', [ArticleController::class, 'show'])->name('article.show');
 
-Route::get('/article/category/{category}', [ArticleController::class, 'byCategory'])->name('article.byCategory');
-
+Route::get('/article/category/{category}', [ArticleController::class, 'byCategory'])->name('article.category');
 Route::get('/article/user/{user}', [ArticleController::class, 'byUser'])->name('article.byUser');
+Route::get('/article/search', [ArticleController::class, 'articleSearch'])->name('article.search');
 
-Route::get('/careers', [PublicController::class, 'careers'])->name('careers');
-
+// Rotte per la sezione carriere
+Route::view('/careers', [PublicController::class, 'careers'])->name('careers');
 Route::post('/careers/submit', [PublicController::class, 'careersSubmit'])->name('careers.submit');
 
+// Rotte per l'amministratore
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
@@ -64,26 +66,18 @@ Route::middleware('admin')->group(function () {
 
 
 Route::middleware('revisor')->group(function () {
+    Route::get('/revisor/dashboard', [RevisorController::class, 'dashboard'])->name('revisor.dashboard');
     Route::post('/revisor/article/accept', [RevisorController::class, 'acceptArticle'])->name('revisor.acceptArticle');
     Route::post('/revisor/article/reject', [RevisorController::class, 'rejectArticle'])->name('revisor.rejectArticle');
     Route::post('/revisor/article/undo', [RevisorController::class, 'undoArticle'])->name('revisor.undoArticle');
 });
 
-Route::middleware('writer')->group(function (){
-    Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
-    Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
-});
-
-Route::get('/article/search', [ArticleController::class, 'articleSearch'])->name('article.search');
-
-Route::middleware(['writer'])->group(function () {
+// Rotte per lo scrittore
+Route::middleware('writer')->group(function () {
     Route::get('/writer/dashboard', [WriterController::class, 'index'])->name('writer.dashboard');
-    Route::get('/writer/article/{article}/edit', [WriterController::class, 'edit'])->name('writer.editArticle');
-    Route::put('/writer/article/{article}', [WriterController::class, 'update'])->name('writer.updateArticle');
-    Route::delete('/writer/article/{article}', [WriterController::class, 'destroy'])->name('writer.deleteArticle');
-    Route::get('/article/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
-    Route::put('/article/update/{article}', [ArticleController::class, 'update'])->name('article.update');
-    Route::delete('/article/destroy/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
+    Route::get('/writer/article/{article}/edit', [WriterController::class, 'edit'])->name('writer.edit');
+    Route::put('/writer/article/{article}', [WriterController::class, 'update'])->name('writer.update');
+    Route::delete('/writer/article/{article}', [WriterController::class, 'destroy'])->name('writer.destroy');
     Route::get('/writer/article/create', [WriterController::class, 'create'])->name('writer.article.create');
     
 });
